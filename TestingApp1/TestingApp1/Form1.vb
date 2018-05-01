@@ -47,7 +47,19 @@ Public Class Form1
 
     Private Sub SerialPort1_DataReceived(sender As Object, e As SerialDataReceivedEventArgs) Handles SerialPort1.DataReceived
         'TODO: MAKE AS EXPECTED, THINGS WORK FINE
-        RXText.Text = RXText.Text + Chr(SerialPort1.ReadChar())
+        Dim ch = SerialPort1.ReadExisting()
+        If ch.EndsWith("?") Then
+            ch = ch.Remove(ch.Length - 1)
+        End If
+        If ch = ChrW(127) Then
+            Try
+                RXText.Text = RXText.Text.Remove(RXText.Text.Length - 1)
+            Catch ex As Exception
+
+            End Try
+            Return
+        End If
+        RXText.Text = RXText.Text + ch
     End Sub
 
     Private Sub Button2_Click(sender As Object, e As EventArgs) Handles Button2.Click
