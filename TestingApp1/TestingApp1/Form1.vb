@@ -21,8 +21,7 @@ Public Class Form1
                 GroupBox2.Enabled = True
                 Button1.Text = "Close Port"
             Catch ex As Exception
-                MsgBox("Error opening port", MsgBoxStyle.Critical, "Serial Port Not Opened")
-                MsgBox("DiagMsg: " + ex.Message, MsgBoxStyle.Critical, "Serial Port Not Opened")
+                MsgBox("Error opening port: " + ex.Message, MsgBoxStyle.Critical, "Serial Port Not Opened")
             End Try
 
         Else
@@ -66,4 +65,5 @@ Public Class Form1
         Dim toSend = TextBox4.Text
         SerialPort1.WriteLine(toSend)
     End Sub
+
 End Class
